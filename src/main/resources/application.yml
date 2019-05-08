@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: springboot-redis
+  redis:
+    hostname: 47.95.117.206
+    port: 6379
+    database: 0
+    password:
+    timeout: 5000
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 100
+        min-idle: 0
+server:
+  port: 8666
