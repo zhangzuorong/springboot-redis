@@ -45,7 +45,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <!--这里写上main方法所在类的路径-->
                 <configuration>
-                    <mainClass>com.szd.village.ServiceApplication</mainClass>
+                    <mainClass>com.zzr.springboot.ServiceApplication</mainClass>
                 </configuration>
             </plugin>
             <plugin>
