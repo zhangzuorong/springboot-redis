@@ -38,4 +38,77 @@
             <version>2.9.0</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--这里写上main方法所在类的路径-->
+                <configuration>
+                    <mainClass>com.szd.village.ServiceApplication</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.0</version>
+                <executions>
+
+                    <!--绑定build命令到mvn package中-->
+                    <execution>
+                        <id>build-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                        <configuration>
+                            <imageName>springboot/${project.artifactId}:${project.version}</imageName>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>tag-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>tag</goal>
+                        </goals>
+                        <configuration>
+                            <image>springboot/${project.artifactId}:${project.version}</image>
+                            <newName>47.95.117.206:5000/springboot/${project.artifactId}:${project.version}</newName>
+                        </configuration>
+                    </execution>
+
+                    <!--绑定push命令到mvn deploy中-->
+                    <execution>
+                        <id>push-image</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                        <configuration>
+                            <serverId>tencent-repository</serverId>
+                            <registryUrl>http://47.95.117.206:5000</registryUrl>
+                            <imageName>47.95.117.206:5000/springboot/${project.artifactId}:${project.version}</imageName>
+                        </configuration>
+                    </execution>
+
+                </executions>
+                <configuration>
+                    <forceTags>true</forceTags>
+                    <imageTags>
+                        <imageTag>${project.version}</imageTag>
+                        <imageTag>latest</imageTag>
+                    </imageTags>
+                    <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
