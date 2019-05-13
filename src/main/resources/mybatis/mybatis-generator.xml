@@ -7,7 +7,7 @@
     <context id="DB2Tables" targetRuntime="MyBatis3">
 
         <!--当取消自动生成注释时，重新生成xml不会自动覆盖，启用UnmergeableXmlMappersPlugin覆盖生成XML文件-->
-        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+        <!--<plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />-->
 
         <commentGenerator>
             <property name="javaFileEncoding" value="UTF-8"/>
@@ -17,8 +17,8 @@
         </commentGenerator>
 
         <!--数据库链接地址账号密码-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://47.95.117.206:3306/dolphin" userId="root"
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://47.95.117.206:3306/test" userId="root"
                         password="123456">
         </jdbcConnection>
 
