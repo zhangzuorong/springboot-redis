@@ -1,6 +1,29 @@
 spring:
   application:
     name: springboot-redis
+  datasource:
+    url: jdbc:mysql://47.95.117.206:3306/regist?useUnicode=true&amp;characterEncoding=UTF-8&amp;tinyInt1isBit=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    # DruidDataSource 阿里数据库连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    #连接池的配置信息
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    useGlobalDataSourceStat: true
   redis:
     hostname: 47.95.117.206
     port: 6379
@@ -13,5 +36,12 @@ spring:
         max-wait: -1
         max-idle: 100
         min-idle: 0
+
+#mybatis 配置信息
+mybatis:
+  type-aliases-package: com.zzr.springboot
+  config-location: classpath:/mybatis/mybatis-config.xml
+  mapperLocations: classpath:/mappers/**/*.xml
+
 server:
   port: 8666
