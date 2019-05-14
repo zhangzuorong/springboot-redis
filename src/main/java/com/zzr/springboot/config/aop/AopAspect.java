@@ -7,8 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-
 /**
  * 开发公司：山东海豚数据技术有限公司
  * 版权：山东海豚数据技术有限公司
@@ -32,15 +30,7 @@ public class AopAspect {
     @Around("excudeService()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
         logger.info("----环绕通知----");
-        // pjp.proceed()获取原方法的返回值
         Object o = pjp.proceed();
-        logger.info("----环绕通知----");
-        // 可以修改值
-        if (o.getClass().toString().indexOf("Map") > 0){
-            Map map = (Map) o;
-            map.put("作者","刘志强");
-            return map;
-        }
         return o;
     }
 

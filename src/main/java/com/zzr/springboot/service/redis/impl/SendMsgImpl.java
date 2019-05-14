@@ -1,6 +1,6 @@
-package com.zzr.springboot.service.impl;
+package com.zzr.springboot.service.redis.impl;
 
-import com.zzr.springboot.service.SendMsgService;
+import com.zzr.springboot.service.redis.SendMsgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

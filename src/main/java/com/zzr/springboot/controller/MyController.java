@@ -1,6 +1,6 @@
 package com.zzr.springboot.controller;
 
-import com.zzr.springboot.service.SendMsgService;
+import com.zzr.springboot.service.redis.SendMsgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
  * 版权：山东海豚数据技术有限公司
  * <p>
  * MyController
- *
+ * 测试redis消息队列
  * @author zzr
  * @created Create Time: 2019/4/25
  */

@@ -1,4 +1,4 @@
-package com.zzr.springboot.service;
+package com.zzr.springboot.service.redis;
 
 /**
  * 开发公司：山东海豚数据技术有限公司
