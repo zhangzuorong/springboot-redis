@@ -1,9 +1,14 @@
 package com.zzr.springboot.controller;
 
 import com.zzr.springboot.service.redis.SendMsgService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 开发公司：山东海豚数据技术有限公司
@@ -19,8 +24,45 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @Service
 public class MyController {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     public SendMsgService sendMsgService;
+    @Autowired
+    public RedisTemplate redisTemplate;
+
+    /**
+     * 添加list
+     */
+    @RequestMapping("/addList")
+    public void addList(String str){
+        for(int i = 0; i< 10; i++){
+            redisTemplate.opsForList().rightPush(str,"v"+i);
+        }
+        logger.info("================添加list=============");
+    }
+
+    /**
+     * 获取list
+     * @param one
+     * @param two
+     * @return
+     */
+    @RequestMapping("/getList")
+    public List getList(String str,Integer one,Integer two){
+        List list = redisTemplate.opsForList().range(str,one,two);
+        return list;
+    }
+
+    /**
+     * 删除list元素
+     * @param str
+     * @param one
+     */
+    @RequestMapping("/rmList")
+    public Long rmList(String str,Integer one,String value){
+        Long i = redisTemplate.opsForList().remove(str,one,value);
+        return i;
+    }
 
     @GetMapping("/sendMsg")
     public String sendMsg(String key,String msg){
