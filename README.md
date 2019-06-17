@@ -21,5 +21,37 @@
 #### 2.集成aop,以及自定义注解
 #### 3.集成 mybatis,mysql,Druid(数据库连接池), mybatis-generator(MBG自动生成)
 #### 4.测试springboot 使用异步方法
+#### 5.集成RedLock（基于redis实现分布式锁）
+官方文档：https://github.com/redisson/redisson/wiki/2.-%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95#26-%E5%8D%95redis%E8%8A%82%E7%82%B9%E6%A8%A1%E5%BC%8F
+```
+1 添加依赖
+      <dependency>
+          <groupId>org.redisson</groupId>
+          <artifactId>redisson</artifactId>
+          <version>3.5.4</version>
+      </dependency>
+2 实现代码（本测试代码基于 单Redis节点模式）
+
+    Config config = new Config();
+    config.useSingleServer().setAddress("redis://47.95.117.206:6379").setClientName("clientName").setDatabase(1);
+    RedissonClient redisson = Redisson.create(config);
+    RLock redLock = redisson.getLock("REDLOCK_KEY");
+    boolean isLock;
+    try{
+        isLock = redLock.tryLock();
+        if(isLock){
+            //实现自己的业务
+        }else {
+            System.out.println("锁被锁了");
+        }
+    }catch (Exception e){
+
+    }finally {
+        if(redLock.isHeldByCurrentThread()){
+            redLock.unlock();
+            System.out.println("关闭锁");
+        }
+    }
+```
 
 
