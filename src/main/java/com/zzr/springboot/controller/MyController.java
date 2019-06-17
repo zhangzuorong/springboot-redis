@@ -1,6 +1,10 @@
 package com.zzr.springboot.controller;
 
 import com.zzr.springboot.service.redis.SendMsgService;
+import org.redisson.Redisson;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,8 +69,28 @@ public class MyController {
     }
 
     @GetMapping("/sendMsg")
-    public String sendMsg(String key,String msg){
-        return sendMsgService.sendMessage(key, msg);
+    public void sendMsg(String key,String msg){
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://47.95.117.206:6379").setClientName("clientName").setDatabase(1);
+        RedissonClient redisson = Redisson.create(config);
+        RLock redLock = redisson.getLock("REDLOCK_KEY");
+        boolean isLock;
+        try{
+            isLock = redLock.tryLock();
+            if(isLock){
+                sendMsgService.sendMessage(key, msg);
+            }else {
+                System.out.println("锁被锁了");
+            }
+        }catch (Exception e){
+
+        }finally {
+            if(redLock.isHeldByCurrentThread()){
+                redLock.unlock();
+                System.out.println("关闭锁");
+            }
+        }
+
     }
 
 

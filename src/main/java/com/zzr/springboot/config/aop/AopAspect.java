@@ -22,7 +22,7 @@ public class AopAspect {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // 定义切点Pointcut
-    @Pointcut("execution(* com.zzr.springboot.controller.*.*(..))")
+    @Pointcut("execution(* com.zzr.springboot.controller.AopController.*(..))")
     public void excudeService() {
     }
 
