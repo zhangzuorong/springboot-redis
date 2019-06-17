@@ -42,7 +42,7 @@
         if(isLock){
             //实现自己的业务
         }else {
-            System.out.println("锁被锁了");
+            System.out.println("锁被占了");
         }
     }catch (Exception e){
 
