@@ -141,23 +141,9 @@
                         </goals>
                         <configuration>
                             <image>springboot/${project.artifactId}:${project.version}</image>
-                            <newName>47.95.117.206:5000/springboot/${project.artifactId}:${project.version}</newName>
+                            <newName>zhangzuorong/${project.artifactId}:${project.version}</newName>
                         </configuration>
                     </execution>
-
-                    <!--绑定push命令到mvn deploy中-->
-                    <!--<execution>-->
-                        <!--<id>push-image</id>-->
-                        <!--<phase>deploy</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>push</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<serverId>tencent-repository</serverId>-->
-                            <!--<registryUrl>http://47.95.117.206:5000</registryUrl>-->
-                            <!--<imageName>47.95.117.206:5000/springboot/${project.artifactId}:${project.version}</imageName>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
 
                 </executions>
                 <configuration>
