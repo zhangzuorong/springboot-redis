@@ -141,7 +141,7 @@
                         </goals>
                         <configuration>
                             <image>springboot/${project.artifactId}:${project.version}</image>
-                            <newName>zhangzuorong/${project.artifactId}:${project.version}</newName>
+                            <newName>registry.cn-qingdao.aliyuncs.com/zhangzuorong/${project.artifactId}:${project.version}</newName>
                         </configuration>
                     </execution>
 
